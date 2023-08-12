@@ -2,7 +2,7 @@ import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput"
 
 function RecentExpensesScreen(){
     return (
-        <ExpensesOutput />
+        <ExpensesOutput expensesPeriod="Total"/>
     )
 }
 

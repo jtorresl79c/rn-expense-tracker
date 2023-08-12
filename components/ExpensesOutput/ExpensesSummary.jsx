@@ -1,5 +1,5 @@
 import { Text, View } from "react-native"
-function ExpensesSummary({periodName}) {
+function ExpensesSummary({expenses,periodName}) {
 
   const expensesSum = expenses.reduce((sum, expense) => {
     return sum + expense.amount
@@ -8,7 +8,7 @@ function ExpensesSummary({periodName}) {
   return (
     <View>
       <Text>{periodName}</Text>
-      <Text>${expensesSum.ToFixed(2)}</Text>
+      <Text>${expensesSum.toFixed(2)}</Text>
     </View>
   );
 }
