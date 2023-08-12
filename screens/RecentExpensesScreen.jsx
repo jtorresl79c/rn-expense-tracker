@@ -1,8 +1,8 @@
-import { Text } from "react-native"
+import ExpensesOutput from "../components/ExpensesOutput/ExpensesOutput"
 
 function RecentExpensesScreen(){
     return (
-        <Text>Gastos recientes</Text>
+        <ExpensesOutput />
     )
 }
 
