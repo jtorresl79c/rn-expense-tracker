@@ -29,7 +29,7 @@ function ExpensesOverview() {
             size={24}
             color={tintColor}
             onPress={() => {
-              navigation.navigate('ManageExpense')
+              navigation.navigate("ManageExpense");
             }}
           />
         ),
@@ -66,14 +66,21 @@ export default function App() {
     <>
       <StatusBar style="light" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerStyle: { backgroundColor: GlobalStyles.colors.primary500 },
+            headerTintColor: "white",
+          }}
+        >
           {/* El orden controla cual se mira primero de los Stack.Screen */}
           <Stack.Screen
             name="ExpensesOverview"
             component={ExpensesOverview}
             options={{ headerShown: false }}
           />
-          <Stack.Screen name="ManageExpense" component={ManageExpenseScreen} />
+          <Stack.Screen name="ManageExpense" component={ManageExpenseScreen} options={{
+            presentation: 'modal'
+          }} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
