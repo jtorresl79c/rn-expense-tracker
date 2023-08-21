@@ -1,7 +1,20 @@
 import { StyleSheet, Text, View } from "react-native";
 import Input from "./Input";
+import { useState } from "react";
 function ExpenseForm() {
-    function amountChangedHandler() {}
+    const [inputValues, setInputValues] = useState({
+        amount: "",
+        date: "",
+        description: "",
+    });
+    function inputChangedHandler(inputIdentifier, enteredValue) {
+        setInputValues((currInputValues) => {
+            return {
+                ...currInputValues,
+                [inputIdentifier]: enteredValue,
+            };
+        });
+    }
 
     return (
         <View style={styles.form}>
@@ -12,7 +25,8 @@ function ExpenseForm() {
                     label="Amount"
                     textInputConfig={{
                         keyboardType: "decimal-pad",
-                        onChangeText: amountChangedHandler,
+                        onChangeText: inputChangedHandler.bind(this, "amount"),
+                        value: inputValues.amount,
                     }}
                 />
                 <Input
@@ -21,7 +35,8 @@ function ExpenseForm() {
                     textInputConfig={{
                         placeholder: "YYYY-MM-DD",
                         maxLength: 10,
-                        onChangeText: () => {},
+                        onChangeText: inputChangedHandler.bind(this, "date"),
+                        value: inputValues.date,
                     }}
                 />
             </View>
@@ -30,6 +45,8 @@ function ExpenseForm() {
                 label="Description"
                 textInputConfig={{
                     multiline: true,
+                    onChangeText: inputChangedHandler.bind(this, "description"),
+                    value: inputValues.description,
                     // autoCapitalize: 'none'
                     // autoCorrect: false, // default is true
                 }}
@@ -40,14 +57,14 @@ function ExpenseForm() {
 
 const styles = StyleSheet.create({
     form: {
-        marginTop: 40
+        marginTop: 40,
     },
     title: {
         fontSize: 18,
-        fontWeight: 'bold',
-        color: 'white',
+        fontWeight: "bold",
+        color: "white",
         marginVertical: 24,
-        textAlign: 'center'
+        textAlign: "center",
     },
     inputsRow: {
         flexDirection: "row",
