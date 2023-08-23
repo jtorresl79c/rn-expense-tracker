@@ -1,30 +1,27 @@
 import axios from "axios";
 
-const BACKED_URL = 'https://react-native-course-79dce-default-rtdb.firebaseio.com'
+const BACKEND_URL =
+    "https://react-native-course-79dce-default-rtdb.firebaseio.com";
 
 export function storeExpense(expenseData) {
-    axios.post(
-        BACKED_URL + "/expenses.json",
-        expenseData
-    );
+    axios.post(BACKEND_URL + "/expenses.json", expenseData);
 }
 
-export async function fetchExpenses(){
-    const response = axios.get(BACKED_URL + '/expenses.json')
+export async function fetchExpenses() {
+    const response = await axios.get(BACKEND_URL + "/expenses.json");
 
-    const expenses = []
+    const expenses = [];
 
-    
-    console.log(response.data)
-    for(const key in response.data){
+    console.log(response.data);
+    for (const key in response.data) {
         const expenseObj = {
             id: key,
             amount: response.data[key].amount,
             date: new Date(response.data[key].date),
-            description: response.data[key].description
-        }
+            description: response.data[key].description,
+        };
 
-        expenses.push(expenseObj)
+        expenses.push(expenseObj);
     }
 
     return expenses;
