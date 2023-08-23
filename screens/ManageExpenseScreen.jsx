@@ -30,15 +30,15 @@ function ManageExpenseScreen({ route, navigation }) {
         navigation.goBack();
     }
 
-    function confirmHandler(expenseData) {
+    async function confirmHandler(expenseData) {
         console.log(expenseData)
         console.log(isEditing)
         console.log(editedExpenseId)
         if (isEditing) {
             expensesCtx.updateExpense(editedExpenseId, expenseData);
         } else {
-            storeExpense(expenseData)
-            expensesCtx.addExpense(expenseData);
+            const id = await storeExpense(expenseData)
+            expensesCtx.addExpense({...expenseData, id: id});
         }
         navigation.goBack();
     }
