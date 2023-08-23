@@ -3,6 +3,7 @@ import Input from "./Input";
 import { useState } from "react";
 import Button from "../UI/Button";
 import { getFormattedDate } from "../../util/date";
+import { GlobalStyles } from "../../constants/styles";
 function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
     const [inputs, setInputs] = useState({
         amount: {
@@ -67,6 +68,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
                 <Input
                     style={styles.rowInput}
                     label="Amount"
+                    invalid={!inputs.amount.isValid}
                     textInputConfig={{
                         keyboardType: "decimal-pad",
                         onChangeText: inputChangedHandler.bind(this, "amount"),
@@ -76,6 +78,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
                 <Input
                     style={styles.rowInput}
                     label="Date"
+                    invalid={!inputs.date.isValid}
                     textInputConfig={{
                         placeholder: "YYYY-MM-DD",
                         maxLength: 10,
@@ -87,6 +90,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
 
             <Input
                 label="Description"
+                invalid={inputs.description.isValid}
                 textInputConfig={{
                     multiline: true,
                     onChangeText: inputChangedHandler.bind(this, "description"),
@@ -96,7 +100,7 @@ function ExpenseForm({ submitButtonLabel, onCancel, onSubmit, defaultValues }) {
                 }}
             />
 
-            {formIsInvalid && <Text>Invalid input values - please check your input </Text>}
+            {formIsInvalid && <Text style={styles.errorText}>Invalid input values - please check your input </Text>}
 
             <View style={styles.buttons}>
                 <Button style={styles.button} mode="flat" onPress={onCancel}>
@@ -129,6 +133,13 @@ const styles = StyleSheet.create({
     rowInput: {
         flex: 1,
     },
+
+    errorText: {
+        textAlign: 'center',
+        color: GlobalStyles.colors.error500,
+        margin: 8
+    },
+
     buttons: {
         flexDirection: "row",
         justifyContent: "center",
